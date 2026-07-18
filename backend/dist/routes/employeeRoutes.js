@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const roleMiddleware_1 = require("../middleware/roleMiddleware");
+const employeeController_1 = require("../controllers/employeeController");
+const organizationController_1 = require("../controllers/organizationController");
+const router = (0, express_1.Router)();
+// Secure all employee routes
+router.use(authMiddleware_1.authenticateJWT);
+router.get('/', employeeController_1.getEmployees);
+router.get('/dropdown', employeeController_1.getEmployeesDropdown);
+router.get('/:id', employeeController_1.getEmployeeById);
+router.get('/:id/reportees', organizationController_1.getDirectReportees);
+router.post('/', (0, roleMiddleware_1.authorizeRoles)('Super Admin', 'HR Manager'), employeeController_1.createEmployee);
+router.post('/bulk', (0, roleMiddleware_1.authorizeRoles)('Super Admin', 'HR Manager'), employeeController_1.bulkImportEmployees);
+router.put('/:id', employeeController_1.updateEmployee);
+router.patch('/:id/manager', (0, roleMiddleware_1.authorizeRoles)('Super Admin', 'HR Manager'), organizationController_1.updateReportingManager);
+router.delete('/:id', (0, roleMiddleware_1.authorizeRoles)('Super Admin'), employeeController_1.deleteEmployee);
+exports.default = router;
