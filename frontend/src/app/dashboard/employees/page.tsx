@@ -194,7 +194,7 @@ export default function EmployeesPage() {
     setFormStatus(emp.status);
     setFormRole(emp.role);
     setFormManager(emp.reportingManager?._id || '');
-    setFormProfileImage(emp.profileImage || '');
+    setFormProfileImage((emp as any).profileImage || '');
     setFormError(null);
     setIsModalOpen(true);
   };
