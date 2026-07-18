@@ -23,6 +23,7 @@ interface Employee {
   employeeId: string;
   name: string;
   email: string;
+  profileImage?: string;
   phone: string;
   department: string;
   designation: string;
@@ -194,7 +195,7 @@ export default function EmployeesPage() {
     setFormStatus(emp.status);
     setFormRole(emp.role);
     setFormManager(emp.reportingManager?._id || '');
-    setFormProfileImage((emp as any).profileImage || '');
+    setFormProfileImage(emp.profileImage || '');
     setFormError(null);
     setIsModalOpen(true);
   };
