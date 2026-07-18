@@ -44,7 +44,7 @@ export default function EmployeesPage() {
 
   // Lists & State
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [dropdownList, setDropdownList] = useState<{ _id: string; name: string; role: string; employeeId: string }[]>([]);
+  const [dropdownList, setDropdownList] = useState<{ _id: string; name: string; role: string; employeeId: string; designation?: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -755,7 +755,7 @@ export default function EmployeesPage() {
                       .filter((emp) => emp._id !== selectedEmpId) // Prevent self reporting selection
                       .map((emp) => (
                         <option key={emp._id} value={emp._id}>
-                          {emp.name} ({(emp as any).designation || emp.role})
+                          {emp.name} ({emp.designation || emp.role})
                         </option>
                       ))}
                   </select>
