@@ -755,7 +755,7 @@ export default function EmployeesPage() {
                       .filter((emp) => emp._id !== selectedEmpId) // Prevent self reporting selection
                       .map((emp) => (
                         <option key={emp._id} value={emp._id}>
-                          {emp.name} ({emp.designation || emp.role})
+                          {emp.name} ({(emp as any).designation || emp.role})
                         </option>
                       ))}
                   </select>
